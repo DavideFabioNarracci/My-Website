@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Davide Narracci - Portfolio Personale</title>
+    <meta content="Portfolio personale di Davide Narracci, appassionato di Digital Marketing e Intelligenza Artificiale." name="description"/>
+
+    <!-- Favicon Placeholder -->
+    <link href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>DN</text></svg>" rel="icon"/>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* Reset & Base Styles */
+        :root {
+            /* ... (variabili colore e font come prima) ... */
+             --color-background-light: rgb(240, 240, 240);
+            --color-text-light: rgb(18, 18, 18);
+            --color-accent-light: rgb(31, 103, 241); /* Blu */
+            --color-text-muted-light: rgba(18, 18, 18, 0.6);
+            --color-border-light: rgba(18, 18, 18, 0.1);
+            --color-card-light: var(--color-accent-light);
+            --color-card-text-light: var(--color-background-light);
+
+            --color-background-dark: rgb(18, 18, 18);
+            --color-text-dark: rgb(240, 240, 240);
+            --color-accent-dark: rgb(224, 241, 31); /* Giallo/verde lime */
+            --color-text-muted-dark: rgba(240, 240, 240, 0.6);
+            --color-border-dark: rgba(240, 240, 240, 0.15);
+            --color-card-dark: var(--color-accent-dark);
+            --color-card-text-dark: var(--color-background-dark);
+
+            --font-primary: 'DM Sans', sans-serif;
+            --font-heading: 'Big Shoulders Display', sans-serif;
+
+            /* Default to dark mode */
+            --color-bg: var(--color-background-dark);
+            --color-text: var(--color-text-dark);
+            --color-accent: var(--color-accent-dark);
+            --color-text-muted: var(--color-text-muted-dark);
+            --color-border: var(--color-border-dark);
+            --color-card: var(--color-card-dark);
+            --color-card-text: var(--color-card-text-dark);
+        }
+
+        @media (prefers-color-scheme: light) {
+             /* Force dark mode */
+             :root {
+                --color-bg: var(--color-background-dark);
+                --color-text: var(--color-text-dark);
+                --color-accent: var(--color-accent-dark);
+                --color-text-muted: var(--color-text-muted-dark);
+                --color-border: var(--color-border-dark);
+                --color-card: var(--color-card-dark);
+                --color-card-text: var(--color-card-text-dark);
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-primary); background-color: var(--color-bg); color: var(--color-text); line-height: 1.6; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+        #main-content { max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 20px; flex-grow: 1; padding-top: 100px; }
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); color: var(--color-accent); line-height: 1.1; margin-bottom: 0.5em; font-weight: 900; }
+        h3 { color: var(--color-text); font-weight: 600; }
+        p { margin-bottom: 1em; color: var(--color-text-muted); }
+        section .container > p { color: var(--color-text); font-size: clamp(18px, 3vw, 22px); }
+        a { color: var(--color-accent); text-decoration: none; transition: color 0.3s ease, text-decoration 0.3s ease; }
+        a:hover, a:focus { color: var(--color-text); text-decoration: underline; }
+        img, svg { max-width: 100%; height: auto; display: block; }
+        section { padding: 80px 0; border-bottom: 1px solid var(--color-border); opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        section.visible { opacity: 1; transform: translateY(0); }
+        section:last-of-type { border-bottom: none; }
+        .container { width: 100%; max-width: 928px; margin: 0 auto; padding: 0 15px; }
+        .hidden-mobile { display: block; }
+        .hidden-desktop { display: none; }
+        .text-center { text-align: center; }
+        .text-muted { color: var(--color-text-muted); }
+        .accent-text { color: var(--color-accent); }
+
+        /* Header / Navigation */
+        #main-header { position: sticky; top: 0; left: 0; width: 100%; background-color: var(--color-bg); z-index: 1000; padding: 20px 0; border-bottom: 1px solid var(--color-border); transition: background-color 0.3s ease; }
+        .nav-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo a { font-family: var(--font-heading); font-size: 24px; font-weight: 700; color: var(--color-accent); text-decoration: none; }
+        .logo a:hover { color: var(--color-text); text-decoration: none; }
+        .menu-toggle { display: none; cursor: pointer; width: 40px; height: 40px; position: relative; z-index: 1001; border: none; background: transparent; }
+        .hamburger, .hamburger::before, .hamburger::after { content: ''; display: block; background-color: var(--color-text); height: 2px; width: 26px; border-radius: 10px; position: absolute; transition: transform 0.3s ease, top 0.3s ease, opacity 0.3s ease; }
+        .hamburger { top: 19px; left: 7px; } .hamburger::before { top: -8px; left: 0; } .hamburger::after { top: 8px; left: 0; }
+        .menu-open .hamburger { transform: rotate(45deg); } .menu-open .hamburger::before { top: 0; transform: rotate(90deg); } .menu-open .hamburger::after { top: 0; opacity: 0; }
+        .main-nav { display: flex; gap: 25px; }
+        .main-nav a { font-size: 15px; font-weight: 500; color: var(--color-text); text-decoration: none; padding: 5px 0; position: relative; transition: color 0.3s ease; }
+        .main-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background-color: var(--color-accent); transition: width 0.3s ease; }
+        .main-nav a:hover, .main-nav a.active { color: var(--color-accent); }
+        .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
+
+        /* Intro Section */
+        #intro { display: flex; flex-direction: column; align-items: center; text-align: center; min-height: calc(100vh - 100px); justify-content: center; padding-top: 0; padding-bottom: 40px; border-bottom: none; opacity: 1; transform: none; transition: none; }
+        #intro .intro-subtitle { font-size: 14px; font-weight: 500; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 20px; opacity: 0; animation: fadeIn 0.8s 0.8s ease-out forwards; }
+        .intro-name { font-size: clamp(50px, 18vw, 200px); line-height: 0.9; margin-bottom: 0.1em; color: var(--color-accent); font-weight: 900; overflow: hidden; }
+        .intro-name span.char { display: inline-block; opacity: 0; transform: translateY(20px) rotate(5deg); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .intro-icon { margin: 30px 0; width: 48px; height: 48px; fill: var(--color-accent); opacity: 0; animation: fadeIn 0.8s 1s ease-out forwards; }
+        .intro-description { max-width: 550px; font-size: clamp(18px, 3vw, 20px); line-height: 1.7; color: var(--color-text); margin: 0 auto 40px auto; opacity: 0; animation: fadeIn 0.8s 1.2s ease-out forwards; }
+        .scroll-indicator { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 20px; opacity: 0; animation: fadeIn 0.8s 1.5s ease-out forwards; }
+        .scroll-line-container { width: 3px; height: 34px; background-color: var(--color-border); position: relative; overflow: hidden; }
+        .scroll-line-progress { position: absolute; top: 0; left: 0; width: 100%; height: 14px; background-color: var(--color-accent); animation: scroll-pulse 2s infinite ease-in-out; }
+        .scroll-indicator span { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; color: var(--color-text-muted); }
+        @keyframes scroll-pulse { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(20px); } }
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        /* Generic Section Title */
+        .section-title-link { display: flex; align-items: center; gap: 20px; text-decoration: none; margin-bottom: 40px; transition: opacity 0.3s ease; }
+        .section-title-link:hover { opacity: 0.8; }
+        .section-title-link h2 { font-size: clamp(24px, 5vw, 32px); margin: 0; color: var(--color-accent); font-weight: 700; letter-spacing: 0.04em; }
+        .section-title-lines { flex-grow: 1; position: relative; height: 4px; min-width: 50px; }
+        .line-bg, .line-accent { position: absolute; left: 0; top: 50%; height: 1px; transform: translateY(-50%); }
+        .line-bg { width: 100%; background-color: var(--color-border); }
+        .line-accent { width: 40px; background-color: var(--color-accent); transition: width 0.4s ease; }
+        .section-title-link:hover .line-accent { width: 80px; }
+
+        /* Single Column List Layout (Exp/Edu) */
+        .single-col-list { display: flex; flex-direction: column; gap: 50px; }
+        .list-item { padding-bottom: 30px; border-bottom: 1px solid var(--color-border); }
+        .list-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .item-header h3 { font-size: clamp(20px, 3vw, 24px); color: var(--color-text); font-weight: 600; margin-bottom: 8px; }
+        .item-meta { font-size: 15px; color: var(--color-text-muted); margin-bottom: 15px; font-weight: 500; }
+        .item-meta span + span::before { content: " | "; margin: 0 8px; opacity: 0.6; }
+        .item-description { font-size: clamp(15px, 2.5vw, 17px); color: var(--color-text-muted); }
+        .item-description p { margin-bottom: 0.5em; color: var(--color-text-muted); }
+        .competencies-list { list-style: none; padding: 15px 0 0 0; margin-top: 15px; border-top: 1px dashed var(--color-border); column-count: 2; column-gap: 20px; }
+        .competencies-list li { font-size: 14px; color: var(--color-text-muted); margin-bottom: 5px; display: block; break-inside: avoid-column; padding-left: 1.2em; position: relative; }
+        .competencies-list li::before { content: "•"; color: var(--color-accent); font-weight: bold; position: absolute; left: 0; }
+
+        /* Project Section - Ebook Preview */
+        #progetti .container { display: flex; justify-content: center; align-items: center; flex-direction: column; } /* ID aggiornato */
+        .ebook-preview { max-width: 600px; width: 100%; margin: 30px auto 0 auto; }
+        .ebook-preview a { display: block; position: relative; overflow: hidden; border-radius: 8px; /* aspect-ratio: 16 / 9; */ /* Use image natural ratio */ box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.3s ease; background-color: var(--color-border); /* Placeholder bg */}
+        .ebook-preview a:hover { transform: scale(1.03); text-decoration: none; }
+        .ebook-preview img { width: 100%; height: auto; /* Maintain aspect ratio */ object-fit: contain; /* Contain within link area */ display: block; }
+        .ebook-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); color: white; padding: 15px 20px; text-align: left; transition: opacity 0.3s ease; opacity: 0; pointer-events: none; }
+        .ebook-preview a:hover .ebook-overlay { opacity: 1; }
+        .ebook-overlay h6 { margin: 0; font-size: 16px; font-weight: 600; color: white; }
+
+        /* Contact Section */
+        #contatti .two-col-layout { align-items: flex-start; display: flex; gap: 60px; } /* ID aggiornato */
+        #contatti .col-left {flex: 1;} #contatti .col-right {flex: 1;} /* ID aggiornato */
+        .contact-info p { font-size: clamp(16px, 2.5vw, 18px); margin-bottom: 15px; max-width: 90%; color: var(--color-text); }
+        .contact-info a:hover { text-decoration: line-through; color: var(--color-text); }
+        .contact-form label { display: block; margin-bottom: 15px; }
+        .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea { width: 100%; padding: 12px; border: none; border-radius: 8px; background-color: var(--color-border); color: var(--color-text); font-family: var(--font-primary); font-size: 16px; margin-top: 5px; transition: background-color 0.3s ease, box-shadow 0.3s ease; }
+        .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--color-text-muted); opacity: 1; }
+        .contact-form input:focus, .contact-form textarea:focus { outline: none; background-color: rgba(255, 255, 255, 0.1); box-shadow: 0 0 0 1px var(--color-accent); }
+        .contact-form textarea { min-height: 150px; resize: vertical; }
+        .form-row { display: flex; gap: 20px; margin-bottom: 15px; }
+        .form-row label { flex: 1; margin-bottom: 0; }
+        .submit-button { display: inline-block; background-color: var(--color-accent); color: var(--color-card-text); padding: 12px 30px; border: none; border-radius: 8px; font-family: var(--font-primary); font-size: 16px; font-weight: 500; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .submit-button:hover, .submit-button:focus { background-color: var(--color-text); color: var(--color-bg); transform: translateY(-2px); text-decoration: none; }
+
+        /* Scrolling Text Marquee */
+        .scrolling-text-outer { width: 100%; overflow: hidden; padding: 20px 0; margin: 20px 0; mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); }
+        .scrolling-text-inner { display: flex; width: fit-content; will-change: transform; animation: marquee 40s linear infinite; }
+        .scrolling-text-inner.reverse { animation-direction: reverse; }
+        .scrolling-text-item { display: flex; align-items: center; padding: 0 30px; flex-shrink: 0; }
+        .scrolling-text-item span { font-family: var(--font-heading); font-size: clamp(60px, 10vw, 128px); font-weight: 900; color: var(--color-accent); white-space: nowrap; }
+        .scrolling-text-item svg { width: clamp(24px, 4vw, 32px); height: clamp(24px, 4vw, 32px); fill: var(--color-border); margin: 0 10px; flex-shrink: 0; }
+        @keyframes marquee { from { transform: translateX(0%); } to { transform: translateX(-50%); } }
+
+        /* Footer */
+        #main-footer { padding: 40px 0; border-top: 1px solid var(--color-border); margin-top: auto; background-color: var(--color-bg); text-align: center; }
+        .footer-content { max-width: 928px; margin: 0 auto; padding: 0 15px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        .social-links { display: flex; gap: 20px; margin-bottom: 10px; }
+        .social-links a { font-size: 14px; font-weight: 500; color: var(--color-text-muted); text-decoration: none; }
+        .social-links a:hover { color: var(--color-accent); text-decoration: underline; }
+        .copyright { font-size: 13px; color: var(--color-text-muted); margin: 0; }
+
+        /* --- Responsive --- */
+        @media (max-width: 809px) {
+            .hidden-mobile { display: none; } .hidden-desktop { display: block; }
+            #main-content { padding-top: 80px; }
+            .menu-toggle { display: block; }
+            .main-nav { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--color-bg); flex-direction: column; align-items: center; justify-content: center; gap: 30px; padding-top: 80px; transform: translateY(-100%); transition: transform 0.4s ease-in-out; }
+            .menu-open .main-nav { display: flex; transform: translateY(0); }
+            .main-nav a { font-size: 24px; font-weight: 700; font-family: var(--font-heading); } .main-nav a::after { display: none; }
+            section { padding: 60px 0; }
+            .two-col-layout { flex-direction: column; gap: 30px; } #contatti .two-col-layout { gap: 40px; } /* ID aggiornato */
+            .sticky-col { position: static; }
+            .single-col-list { gap: 40px; } .list-item { padding-bottom: 25px; }
+            .competencies-list { column-count: 1; }
+            .stats-grid { flex-direction: column; margin-top: 30px; }
+            .stat-item { border-left: none; border-bottom: 2px solid var(--color-border); padding: 20px 0; } .stat-item:first-child { padding-left: 0; } .stat-item:last-child { border-bottom: none; } .stat-item h4 { font-size: 42px; } .stat-item p { max-width: 100%; text-align: left; }
+            .writing-item-content { flex-direction: column; align-items: flex-start; gap: 10px; } .writing-item-meta { width: 100%; justify-content: space-between; } .writing-item-date { text-align: left; }
+            .form-row { flex-direction: column; gap: 15px; margin-bottom: 0; } .form-row label { margin-bottom: 15px; }
+            .scrolling-text-item span { font-size: clamp(40px, 15vw, 80px); }
+            .intro-icon { width: 32px; height: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="nav-wrapper">
+            <div class="logo"><a href="#">DN</a></div>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Apri menu"><span class="hamburger"></span></button>
+            <nav class="main-nav" id="main-nav">
+                <a href="#intro" class="active">HOME</a>
+                <a href="#about">ABOUT</a>
+                <a href="#experience">ESPERIENZA</a>
+                <a href="#education">FORMAZIONE</a>
+                <a href="#progetti">PROGETTI</a> <!-- Link Aggiornato -->
+                <a href="#contatti">CONTATTI</a> <!-- Link Aggiornato -->
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- Intro Section -->
+        <section id="intro">
+            <div class="container">
+                <p class="intro-subtitle">DIGITAL MARKETING & ARTIFICIAL INTELLIGENCE</p>
+                <h1 class="intro-name name-reveal" id="name-line-1">DAVIDE</h1>
+                <h1 class="intro-name name-reveal" id="name-line-2">NARRACCI</h1>
+                <svg class="intro-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.75 48C20.903 37.41 10.483 27.457 0 25.25V22.625C10.549 20.105 20.686 10.941 22.75 0L25.375 0C27.169 10.66 37.542 20.343 48 22.625V25.25C37.735 27.377 27.106 37.364 25.375 48H22.75Z" fill="currentColor"/></svg>
+                <p class="intro-description">Sono Davide Fabio Narracci, un ragazzo appassionato di Digital Marketing e Intelligenza Artificiale.</p>
+            </div>
+            <div class="scroll-indicator">
+                <div class="scroll-line-container"><div class="scroll-line-progress"></div></div>
+                <span>SCROLL</span>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+             <a href="#about" class="section-title-link"><h2>ABOUT</h2><div class="section-title-lines"><div class="line-bg"></div><div class="line-accent"></div></div></a>
+            <div class="container">
+                 <p>Sono un ragazzo ambizioso e creativo. Mi appassiona il mondo del Digital Marketing e lo sviluppo di contenuti professionali sorprendenti e che suscitino emozioni. Cerco esperienze lavorative che mi permettano di crescere professionalmente facendomi maturare e diventare un professionista più che qualificato.</p>
+                 <h3 style="margin-top: 40px; margin-bottom: 15px;">Soft Skills</h3>
+                 <ul style="list-style: none; padding-left: 0; column-count: 2; column-gap: 20px;">
+                    <li style="margin-bottom: 8px; color: var(--color-text-muted); break-inside: avoid-column;">• Creatività</li> <li style="margin-bottom: 8px; color: var(--color-text-muted); break-inside: avoid-column;">• Sintesi</li> <li style="margin-bottom: 8px; color: var(--color-text-muted); break-inside: avoid-column;">• Motivazione</li> <li style="margin-bottom: 8px; color: var(--color-text-muted); break-inside: avoid-column;">• Problem solving</li> <li style="margin-bottom: 8px; color: var(--color-text-muted); break-inside: avoid-column;">• Lavoro di gruppo</li> <li style="margin-bottom: 8px; color: var(--color-text-muted); break-inside: avoid-column;">• Adattabilità</li> <li style="margin-bottom: 8px; color: var(--color-text-muted); break-inside: avoid-column;">• Empatia</li> <li style="margin-bottom: 8px; color: var(--color-text-muted); break-inside: avoid-column;">• Leadership</li> <li style="margin-bottom: 8px; color: var(--color-text-muted); break-inside: avoid-column;">• Autonomia</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+             <a href="#experience" class="section-title-link"><h2>ESPERIENZA LAVORATIVA</h2><div class="section-title-lines"><div class="line-bg"></div><div class="line-accent"></div></div></a>
+            <div class="container single-col-list">
+                <div class="list-item experience-item">
+                    <div class="item-header"><h3>Digital Marketing</h3><p class="item-meta"><span>Consorzio Zucchi39 (Cusano Milanino)</span><span>13/01/2025 – Attuale</span></p></div>
+                    <p class="item-description">Gestione Social Media, ottimizzazione SEO. Analisi dati (SEOZoom, Google Analytics), pianificazione editoriale (Excel, Meta Suite) e creazione di contenuti per il blog interno su WordPress.</p>
+                </div>
+                 <div class="list-item experience-item">
+                    <div class="item-header"><h3>Backoffice e Inserimento Dati</h3><p class="item-meta"><span></span></p></div>
+                     <p class="item-description">Attività di supporto backoffice e data entry.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scrolling Text Section -->
+        <section class="scrolling-text-section" style="padding: 40px 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+            <div class="scrolling-text-outer">
+                <div class="scrolling-text-inner" id="scrolling-text-1">
+                    <!-- Contenuto aggiornato e duplicato -->
+                    <div class="scrolling-text-item"><span>AI</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                    <div class="scrolling-text-item"><span>PHOTOSHOP</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                    <div class="scrolling-text-item"><span>META</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                    <div class="scrolling-text-item"><span>ILLUSTRATOR</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                    <div class="scrolling-text-item"><span>SOCIAL</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                     <!-- Duplicato -->
+                     <div class="scrolling-text-item"><span>AI</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                    <div class="scrolling-text-item"><span>PHOTOSHOP</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                    <div class="scrolling-text-item"><span>META</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                    <div class="scrolling-text-item"><span>ILLUSTRATOR</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                    <div class="scrolling-text-item"><span>SOCIAL</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                </div>
+            </div>
+            <div class="scrolling-text-outer">
+                 <div class="scrolling-text-inner reverse" id="scrolling-text-2">
+                     <!-- Contenuto aggiornato e duplicato -->
+                     <div class="scrolling-text-item"><span>AI</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                    <div class="scrolling-text-item"><span>PHOTOSHOP</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                    <div class="scrolling-text-item"><span>META</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                    <div class="scrolling-text-item"><span>ILLUSTRATOR</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                    <div class="scrolling-text-item"><span>SOCIAL</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                     <!-- Duplicato -->
+                     <div class="scrolling-text-item"><span>AI</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                    <div class="scrolling-text-item"><span>PHOTOSHOP</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                    <div class="scrolling-text-item"><span>META</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                    <div class="scrolling-text-item"><span>ILLUSTRATOR</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                    <div class="scrolling-text-item"><span>SOCIAL</span></div> <div class="scrolling-text-item"><svg viewBox="0 0 32 32"><path d="M15.167 32C13.935 24.94 6.989 18.305 0 16.833V15.083C7.033 13.403 13.791 7.294 15.167 0h1.75C18.113 7.107 25.028 13.562 32 15.083v1.75C25.157 18.251 18.071 24.909 16.917 32z"/></svg></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education">
+             <a href="#education" class="section-title-link"><h2>FORMAZIONE</h2><div class="section-title-lines"><div class="line-bg"></div><div class="line-accent"></div></div></a>
+            <div class="container single-col-list">
+                 <div class="list-item education-item">
+                    <div class="item-header"><h3>Digital Marketing Data Specialist</h3><p class="item-meta"><span>ITS Angelo Rizzoli</span><span>2023 – 2025</span></p></div>
+                    <div class="item-description"><p>Il corso di studi si articola in due macro-aree: l'acquisizione e l'applicazione di materie formative di base (economia, diritto, tecniche grafiche e content) e trasversali (Team Working, Desing thinking e problem solving).</p><h4 style="margin-top: 20px; margin-bottom: 10px; font-size: 16px; color: var(--color-text); font-weight: 600;">Competenze Acquisite:</h4><ul class="competencies-list"><li>Analisi dei dati SEO</li> <li>Content Marketing</li> <li>Social Media Marketing</li> <li>Strumenti Google: Analytics, Adv, Trend, Tag manager</li> <li>Certificazione Google</li> <li>Strumenti Meta: Meta business Suite / Manager</li> <li>Marketing Automation: Email Chef</li> <li>Suite Adobe</li> <li>Figma</li> <li>Canva</li></ul></div>
+                </div>
+                 <div class="list-item education-item">
+                    <div class="item-header"><h3>Giurisprudenza</h3><p class="item-meta"><span>Università Cattolica del Sacro Cuore</span><span>2021 – 2023</span></p></div>
+                    <p class="item-description">Studio dei principi del diritto, nazionale e internazionale, unito ad una preparazione in ambito storico ed economico.</p>
+                </div>
+                <div class="list-item education-item">
+                    <div class="item-header"><h3>Corso pre-accademico e Propedeutico</h3><p class="item-meta"><span>Conservatorio di Musica "Giuseppe Verdi"</span><span>2018 – 2021</span></p></div>
+                    <p class="item-description">Corso pre accademico e propedeutico di strumento, musica di insieme e teoria musicale.</p>
+                </div>
+                <div class="list-item education-item">
+                    <div class="item-header"><h3>Corso B2 di lingua inglese</h3><p class="item-meta"><span>Delfin English School Dublin</span><span>2021 – 2021</span></p></div>
+                    <p class="item-description">Il programma enfatizza lo sviluppo delle quattro abilità linguistiche chiave: lettura, scrittura, conversazione e ascolto. Il piano si concentra anche sul perfezionamento della grammatica e sull'ampliamento del vocabolario.</p>
+                </div>
+                 <div class="list-item education-item">
+                    <div class="item-header"><h3>Diploma di istruzione secondaria superiore</h3><p class="item-meta"><span>ITCS "Erasmo da Rotterdam"</span><span>2016 – 2021</span><span>Votazione: 80/100</span></p></div>
+                    <p class="item-description">Il percorso del liceo delle scienze umane è indirizzato allo studio delle teorie esplicative dei fenomeni collegati alla costruzione dell'identità personale e delle relazioni umane e sociali.</p>
+                </div>
+            </div>
+        </section>
+
+         <!-- Projects Section (GYMBOXX Ebook Link) -->
+        <section id="progetti"> <!-- ID Aggiornato -->
+             <a href="#progetti" class="section-title-link"><h2>PROGETTI</h2><div class="section-title-lines"><div class="line-bg"></div><div class="line-accent"></div></div></a> <!-- Titolo Aggiornato -->
+            <div class="container">
+                 <p>Clicca sull'immagine per visualizzare la presentazione completa del progetto GYMBOXX su Issuu.</p>
+                <div class="ebook-preview">
+                    <a href="https://issuu.com/davide.narracci/docs/gymboxx_caso_studio" target="_blank" rel="noopener noreferrer" title="Visualizza presentazione GYMBOXX su Issuu">
+                        <img src="https://image.isu.pub/250423093451-42d26d83a6bad75f674a31c82032eb5c/jpg/page_1_thumb_large.jpg" alt="Copertina Presentazione GYMBOXX">
+                        <div class="ebook-overlay">
+                            <h6>GYMBOXX Presentation (Ebook)</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contatti"> <!-- ID Aggiornato -->
+            <a href="#contatti" class="section-title-link"><h2>CONTATTI</h2><div class="section-title-lines"><div class="line-bg"></div><div class="line-accent"></div></div></a> <!-- Titolo Aggiornato -->
+            <div class="container two-col-layout">
+                <div class="col-left contact-info">
+                    <p>Sei interessato a discutere di un progetto, una collaborazione o vuoi semplicemente saperne di più? Contattami!</p>
+                    <!-- Riga Indirizzo Rimossa -->
+                    <p><a href="mailto:davide.narracci@yahoo.com">davide.narracci@yahoo.com</a></p>
+                    <!-- Riga Telefono Rimossa -->
+                </div>
+                <div class="col-right">
+                    <form class="contact-form" action="#" method="post"> <!-- Nota: action="#" non invierà realmente il form -->
+                         <div class="form-row">
+                            <label for="name">Nome<input type="text" id="name" name="Name" placeholder="Mario Rossi" required></label>
+                            <label for="email">Email<input type="email" id="email" name="Email" placeholder="mario@esempio.com" required></label>
+                         </div>
+                        <label for="message">Messaggio<textarea id="message" name="Message" placeholder="Il tuo messaggio..." required></textarea></label>
+                        <button type="submit" class="submit-button">Invia Messaggio</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="main-footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a> <!-- Aggiorna con il tuo link reale -->
+                <a href="#" target="_blank" rel="noopener noreferrer">GitHub</a> <!-- Aggiorna con il tuo link reale -->
+                <a href="#" target="_blank" rel="noopener noreferrer">Portfolio</a> <!-- Aggiorna con il tuo link reale o rimuovi se ridondante -->
+            </div>
+            <p class="copyright">© 2024 Davide Narracci. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Mobile Navigation Toggle ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        const header = document.getElementById('main-header');
+        const navLinks = mainNav.querySelectorAll('a');
+        if (menuToggle && mainNav && header) {
+            menuToggle.addEventListener('click', () => { header.classList.toggle('menu-open'); document.body.classList.toggle('modal-open', header.classList.contains('menu-open')); });
+            navLinks.forEach(link => { link.addEventListener('click', () => { if (header.classList.contains('menu-open')) { header.classList.remove('menu-open'); document.body.classList.remove('modal-open'); } }); });
+        }
+
+         // --- Active Link Highlighting ---
+         const sectionsForNav = document.querySelectorAll('section[id]'); // Ora includerà #progetti e #contatti
+         const mainNavLinks = document.querySelectorAll('.main-nav a');
+         function throttle(func, limit) { let inThrottle; return function() { const args = arguments; const context = this; if (!inThrottle) { func.apply(context, args); inThrottle = true; setTimeout(() => inThrottle = false, limit); } } }
+         function navHighlighter() { let scrollY = window.pageYOffset; let currentSectionId = null; const headerOffset = 150; sectionsForNav.forEach(current => { const sectionHeight = current.offsetHeight; const sectionTop = current.offsetTop - headerOffset; if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) { currentSectionId = current.getAttribute('id'); } }); if (scrollY < sectionsForNav[0].offsetTop - headerOffset) { currentSectionId = 'intro'; } else if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 50) { currentSectionId = sectionsForNav[sectionsForNav.length - 1].getAttribute('id'); } mainNavLinks.forEach(link => { link.classList.remove('active'); if (currentSectionId && link.getAttribute('href') === '#' + currentSectionId) { link.classList.add('active'); } }); }
+          window.addEventListener('scroll', throttle(navHighlighter, 100));
+          document.addEventListener('DOMContentLoaded', navHighlighter);
+
+        // --- Marquee Setup ---
+        function setupMarquee(elementId) { const inner = document.getElementById(elementId); if (inner) { if(inner.children.length > 0 && inner.scrollWidth > inner.clientWidth * 1.5) { const originalContent = []; for(let i = 0; i < inner.children.length / 2; i++) { originalContent.push(inner.children[i].outerHTML); } inner.innerHTML = originalContent.join('') + originalContent.join(''); } else if (inner.children.length > 0) { const content = inner.innerHTML; inner.innerHTML += content; } } }
+        document.addEventListener('DOMContentLoaded', () => { setupMarquee('scrolling-text-1'); setupMarquee('scrolling-text-2'); });
+
+         // --- Section Visibility Animation ---
+         const animatedSections = document.querySelectorAll('section:not(#intro)');
+         const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+         const observerCallback = (entries, observer) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); };
+         const sectionObserver = new IntersectionObserver(observerCallback, observerOptions);
+         animatedSections.forEach(section => sectionObserver.observe(section));
+
+        // --- Name Reveal Animation ---
+         function animateNameReveal(elementId, delayStart = 0) { const nameElement = document.getElementById(elementId); if (!nameElement || nameElement.dataset.animated) return; const text = nameElement.textContent; nameElement.textContent = ''; nameElement.dataset.animated = 'true'; let currentDelay = delayStart; text.split('').forEach((char) => { const span = document.createElement('span'); span.className = 'char'; span.style.transitionDelay = `${currentDelay}ms`; span.textContent = (char === ' ') ? '\u00A0' : char; nameElement.appendChild(span); setTimeout(() => { span.style.opacity = '1'; span.style.transform = 'translateY(0) rotate(0deg)'; }, 10); currentDelay += 60; }); }
+          window.addEventListener('load', () => { animateNameReveal('name-line-1', 100); const firstLineLength = document.getElementById('name-line-1')?.textContent?.length || 0; animateNameReveal('name-line-2', 100 + (firstLineLength * 60)); });
+
+         // No more modal JS needed
+
+    </script>
+
+    <!-- ===== Flowise Chatbot Script START (Updated) ===== -->
+    <script type="module">
+        import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
+        Chatbot.init({
+            chatflowid: "d5f1b512-f5a6-4c2c-809e-280693e44e07",
+            apiHost: "https://flowise-production-efc7.up.railway.app",
+            chatflowConfig: {
+                /* Chatflow Config */
+            },
+            observersConfig: {
+                /* Observers Config */
+            },
+            theme: {
+                button: {
+                    backgroundColor: '#3B81F6',
+                    right: 20,
+                    bottom: 20,
+                    size: 48,
+                    dragAndDrop: true,
+                    iconColor: 'white',
+                    customIconSrc: 'https://i.postimg.cc/Y9YmGdp4/Ritratto-moderno-con-occhiali-neri.png', // URL Stabile
+                    autoWindowOpen: {
+                        autoOpen: true,
+                        openDelay: 2,
+                        autoOpenOnMobile: false
+                    }
+                },
+                tooltip: {
+                    showTooltip: true,
+                    tooltipMessage: 'Nel caso avessi bisogno',
+                    tooltipBackgroundColor: 'black',
+                    tooltipTextColor: 'white',
+                    tooltipFontSize: 16
+                },
+                customCSS: ``,
+                chatWindow: {
+                    showTitle: true,
+                    showAgentMessages: true,
+                    title: 'Davide',
+                    titleAvatarSrc: 'https://i.postimg.cc/Y9YmGdp4/Ritratto-moderno-con-occhiali-neri.png', // URL Stabile
+                    welcomeMessage: 'Eccoci, dimmi tutto',
+                    errorMessage: 'This is a custom error message',
+                    backgroundColor: '#ffffff',
+                    backgroundImage: '', // Rimosso placeholder, inserisci URL o lascia vuoto
+                    height: 700,
+                    width: 400,
+                    fontSize: 16,
+                    starterPrompts: [
+                        "parlami di te?",
+                        "di cosa ti occupi?"
+                    ],
+                    starterPromptFontSize: 15,
+                    clearChatOnReload: false,
+                    sourceDocsTitle: 'Sources:',
+                    renderHTML: true,
+                    botMessage: {
+                        backgroundColor: '#f7f8ff',
+                        textColor: '#303235',
+                        showAvatar: true,
+                        avatarSrc: 'https://i.postimg.cc/Y9YmGdp4/Ritratto-moderno-con-occhiali-neri.png' // URL Stabile
+                    },
+                    userMessage: {
+                        backgroundColor: '#3B81F6',
+                        textColor: '#ffffff',
+                        showAvatar: true,
+                        avatarSrc: 'https://raw.githubusercontent.com/zahidkhawaja/langchain-chat-nextjs/main/public/usericon.png'
+                    },
+                    textInput: {
+                        placeholder: 'Type your question',
+                        backgroundColor: '#ffffff',
+                        textColor: '#303235',
+                        sendButtonColor: '#3B81F6',
+                        maxChars: 50,
+                        maxCharsWarningMessage: 'You exceeded the characters limit. Please input less than 50 characters.',
+                        autoFocus: true,
+                        sendMessageSound: true,
+                        sendSoundLocation: 'send_message.mp3', // Assicurati che il file sia accessibile
+                        receiveMessageSound: true,
+                        receiveSoundLocation: 'receive_message.mp3' // Assicurati che il file sia accessibile
+                    },
+                    feedback: {
+                        color: '#303235'
+                    },
+                    dateTimeToggle: {
+                        date: true,
+                        time: true
+                    },
+                    // Nota: la sezione 'footer' è stata rimossa in quest'ultima versione che hai fornito.
+                    // Se la vuoi, aggiungila nuovamente qui. Esempio:
+                    // footer: {
+                    //     textColor: '#303235',
+                    //     text: 'Powered by',
+                    //     company: 'Flowise',
+                    //     companyLink: 'https://flowiseai.com'
+                    // }
+                }
+            }
+        })
+    </script>
+    <!-- ===== Flowise Chatbot Script END ===== -->
+
+</body>
+</html>
