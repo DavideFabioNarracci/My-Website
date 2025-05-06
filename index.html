@@ -143,21 +143,6 @@
         .ebook-preview a:hover .ebook-overlay { opacity: 1; }
         .ebook-overlay h6 { margin: 0; font-size: 16px; font-weight: 600; color: white; }
 
-        /* Contact Section */
-        #contatti .two-col-layout { align-items: flex-start; display: flex; gap: 60px; } /* ID aggiornato */
-        #contatti .col-left {flex: 1;} #contatti .col-right {flex: 1;} /* ID aggiornato */
-        .contact-info p { font-size: clamp(16px, 2.5vw, 18px); margin-bottom: 15px; max-width: 90%; color: var(--color-text); }
-        .contact-info a:hover { text-decoration: line-through; color: var(--color-text); }
-        .contact-form label { display: block; margin-bottom: 15px; }
-        .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea { width: 100%; padding: 12px; border: none; border-radius: 8px; background-color: var(--color-border); color: var(--color-text); font-family: var(--font-primary); font-size: 16px; margin-top: 5px; transition: background-color 0.3s ease, box-shadow 0.3s ease; }
-        .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--color-text-muted); opacity: 1; }
-        .contact-form input:focus, .contact-form textarea:focus { outline: none; background-color: rgba(255, 255, 255, 0.1); box-shadow: 0 0 0 1px var(--color-accent); }
-        .contact-form textarea { min-height: 150px; resize: vertical; }
-        .form-row { display: flex; gap: 20px; margin-bottom: 15px; }
-        .form-row label { flex: 1; margin-bottom: 0; }
-        .submit-button { display: inline-block; background-color: var(--color-accent); color: var(--color-card-text); padding: 12px 30px; border: none; border-radius: 8px; font-family: var(--font-primary); font-size: 16px; font-weight: 500; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .submit-button:hover, .submit-button:focus { background-color: var(--color-text); color: var(--color-bg); transform: translateY(-2px); text-decoration: none; }
-
         /* Scrolling Text Marquee */
         .scrolling-text-outer { width: 100%; overflow: hidden; padding: 20px 0; margin: 20px 0; mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); }
         .scrolling-text-inner { display: flex; width: fit-content; will-change: transform; animation: marquee 40s linear infinite; }
@@ -184,14 +169,14 @@
             .menu-open .main-nav { display: flex; transform: translateY(0); }
             .main-nav a { font-size: 24px; font-weight: 700; font-family: var(--font-heading); } .main-nav a::after { display: none; }
             section { padding: 60px 0; }
-            .two-col-layout { flex-direction: column; gap: 30px; } #contatti .two-col-layout { gap: 40px; } /* ID aggiornato */
+            /* .two-col-layout { flex-direction: column; gap: 30px; } Removed as #contatti is gone */
             .sticky-col { position: static; }
             .single-col-list { gap: 40px; } .list-item { padding-bottom: 25px; }
             .competencies-list { column-count: 1; }
             .stats-grid { flex-direction: column; margin-top: 30px; }
             .stat-item { border-left: none; border-bottom: 2px solid var(--color-border); padding: 20px 0; } .stat-item:first-child { padding-left: 0; } .stat-item:last-child { border-bottom: none; } .stat-item h4 { font-size: 42px; } .stat-item p { max-width: 100%; text-align: left; }
             .writing-item-content { flex-direction: column; align-items: flex-start; gap: 10px; } .writing-item-meta { width: 100%; justify-content: space-between; } .writing-item-date { text-align: left; }
-            .form-row { flex-direction: column; gap: 15px; margin-bottom: 0; } .form-row label { margin-bottom: 15px; }
+            /* .form-row { flex-direction: column; gap: 15px; margin-bottom: 0; } .form-row label { margin-bottom: 15px; } Removed as form is gone */
             .scrolling-text-item span { font-size: clamp(40px, 15vw, 80px); }
             .intro-icon { width: 32px; height: 32px; }
         }
@@ -208,8 +193,7 @@
                 <a href="#about">ABOUT</a>
                 <a href="#experience">ESPERIENZA</a>
                 <a href="#education">FORMAZIONE</a>
-                <a href="#progetti">PROGETTI</a> <!-- Link Aggiornato -->
-                <a href="#contatti">CONTATTI</a> <!-- Link Aggiornato -->
+                <a href="#progetti">PROGETTI</a>
             </nav>
         </div>
     </header>
@@ -337,37 +321,13 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contatti"> <!-- ID Aggiornato -->
-            <a href="#contatti" class="section-title-link"><h2>CONTATTI</h2><div class="section-title-lines"><div class="line-bg"></div><div class="line-accent"></div></div></a> <!-- Titolo Aggiornato -->
-            <div class="container two-col-layout">
-                <div class="col-left contact-info">
-                    <p>Sei interessato a discutere di un progetto, una collaborazione o vuoi semplicemente saperne di più? Contattami!</p>
-                    <!-- Riga Indirizzo Rimossa -->
-                    <p><a href="mailto:davide.narracci@yahoo.com">davide.narracci@yahoo.com</a></p>
-                    <!-- Riga Telefono Rimossa -->
-                </div>
-                <div class="col-right">
-                    <form class="contact-form" action="#" method="post"> <!-- Nota: action="#" non invierà realmente il form -->
-                         <div class="form-row">
-                            <label for="name">Nome<input type="text" id="name" name="Name" placeholder="Mario Rossi" required></label>
-                            <label for="email">Email<input type="email" id="email" name="Email" placeholder="mario@esempio.com" required></label>
-                         </div>
-                        <label for="message">Messaggio<textarea id="message" name="Message" placeholder="Il tuo messaggio..." required></textarea></label>
-                        <button type="submit" class="submit-button">Invia Messaggio</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
     </main>
 
     <footer id="main-footer">
         <div class="footer-content">
             <div class="social-links">
-                <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a> <!-- Aggiorna con il tuo link reale -->
-                <a href="#" target="_blank" rel="noopener noreferrer">GitHub</a> <!-- Aggiorna con il tuo link reale -->
-                <a href="#" target="_blank" rel="noopener noreferrer">Portfolio</a> <!-- Aggiorna con il tuo link reale o rimuovi se ridondante -->
+                <a href="https://www.instagram.com/davide_narracci/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.linkedin.com/in/davide-fabio-narracci-13b550221/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             </div>
             <p class="copyright">© 2024 Davide Narracci. Tutti i diritti riservati.</p>
         </div>
@@ -385,12 +345,44 @@
         }
 
          // --- Active Link Highlighting ---
-         const sectionsForNav = document.querySelectorAll('section[id]'); // Ora includerà #progetti e #contatti
+         const sectionsForNav = document.querySelectorAll('section[id]');
          const mainNavLinks = document.querySelectorAll('.main-nav a');
          function throttle(func, limit) { let inThrottle; return function() { const args = arguments; const context = this; if (!inThrottle) { func.apply(context, args); inThrottle = true; setTimeout(() => inThrottle = false, limit); } } }
-         function navHighlighter() { let scrollY = window.pageYOffset; let currentSectionId = null; const headerOffset = 150; sectionsForNav.forEach(current => { const sectionHeight = current.offsetHeight; const sectionTop = current.offsetTop - headerOffset; if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) { currentSectionId = current.getAttribute('id'); } }); if (scrollY < sectionsForNav[0].offsetTop - headerOffset) { currentSectionId = 'intro'; } else if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 50) { currentSectionId = sectionsForNav[sectionsForNav.length - 1].getAttribute('id'); } mainNavLinks.forEach(link => { link.classList.remove('active'); if (currentSectionId && link.getAttribute('href') === '#' + currentSectionId) { link.classList.add('active'); } }); }
-          window.addEventListener('scroll', throttle(navHighlighter, 100));
-          document.addEventListener('DOMContentLoaded', navHighlighter);
+         function navHighlighter() {
+            let scrollY = window.pageYOffset;
+            let currentSectionId = null;
+            const headerOffset = 150;
+
+            sectionsForNav.forEach(current => {
+                if (current) {
+                    const sectionHeight = current.offsetHeight;
+                    const sectionTop = current.offsetTop - headerOffset;
+                    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                        currentSectionId = current.getAttribute('id');
+                    }
+                }
+            });
+
+            if (sectionsForNav.length > 0 && sectionsForNav[0]) {
+                 if (scrollY < sectionsForNav[0].offsetTop - headerOffset) {
+                    currentSectionId = 'intro';
+                } else if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 50) {
+                    if (sectionsForNav[sectionsForNav.length - 1]) {
+                        currentSectionId = sectionsForNav[sectionsForNav.length - 1].getAttribute('id');
+                    }
+                }
+            }
+
+
+            mainNavLinks.forEach(link => {
+                link.classList.remove('active');
+                if (currentSectionId && link.getAttribute('href') === '#' + currentSectionId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', throttle(navHighlighter, 100));
+        document.addEventListener('DOMContentLoaded', navHighlighter);
 
         // --- Marquee Setup ---
         function setupMarquee(elementId) { const inner = document.getElementById(elementId); if (inner) { if(inner.children.length > 0 && inner.scrollWidth > inner.clientWidth * 1.5) { const originalContent = []; for(let i = 0; i < inner.children.length / 2; i++) { originalContent.push(inner.children[i].outerHTML); } inner.innerHTML = originalContent.join('') + originalContent.join(''); } else if (inner.children.length > 0) { const content = inner.innerHTML; inner.innerHTML += content; } } }
@@ -406,8 +398,6 @@
         // --- Name Reveal Animation ---
          function animateNameReveal(elementId, delayStart = 0) { const nameElement = document.getElementById(elementId); if (!nameElement || nameElement.dataset.animated) return; const text = nameElement.textContent; nameElement.textContent = ''; nameElement.dataset.animated = 'true'; let currentDelay = delayStart; text.split('').forEach((char) => { const span = document.createElement('span'); span.className = 'char'; span.style.transitionDelay = `${currentDelay}ms`; span.textContent = (char === ' ') ? '\u00A0' : char; nameElement.appendChild(span); setTimeout(() => { span.style.opacity = '1'; span.style.transform = 'translateY(0) rotate(0deg)'; }, 10); currentDelay += 60; }); }
           window.addEventListener('load', () => { animateNameReveal('name-line-1', 100); const firstLineLength = document.getElementById('name-line-1')?.textContent?.length || 0; animateNameReveal('name-line-2', 100 + (firstLineLength * 60)); });
-
-         // No more modal JS needed
 
     </script>
 
@@ -431,7 +421,7 @@
                     size: 48,
                     dragAndDrop: true,
                     iconColor: 'white',
-                    customIconSrc: 'https://i.postimg.cc/Y9YmGdp4/Ritratto-moderno-con-occhiali-neri.png', // URL Stabile
+                    customIconSrc: 'https://i.postimg.cc/Y9YmGdp4/Ritratto-moderno-con-occhiali-neri.png',
                     autoWindowOpen: {
                         autoOpen: true,
                         openDelay: 2,
@@ -450,13 +440,13 @@
                     showTitle: true,
                     showAgentMessages: true,
                     title: 'Davide',
-                    titleAvatarSrc: 'https://i.postimg.cc/Y9YmGdp4/Ritratto-moderno-con-occhiali-neri.png', // URL Stabile
+                    titleAvatarSrc: 'https://i.postimg.cc/Y9YmGdp4/Ritratto-moderno-con-occhiali-neri.png',
                     welcomeMessage: 'Eccoci, dimmi tutto',
                     errorMessage: 'This is a custom error message',
                     backgroundColor: '#ffffff',
-                    backgroundImage: '', // Rimosso placeholder, inserisci URL o lascia vuoto
-                    height: 700,
-                    width: 400,
+                    backgroundImage: '',
+                    height: 595,
+                    width: 340,
                     fontSize: 16,
                     starterPrompts: [
                         "parlami di te?",
@@ -470,7 +460,7 @@
                         backgroundColor: '#f7f8ff',
                         textColor: '#303235',
                         showAvatar: true,
-                        avatarSrc: 'https://i.postimg.cc/Y9YmGdp4/Ritratto-moderno-con-occhiali-neri.png' // URL Stabile
+                        avatarSrc: 'https://i.postimg.cc/Y9YmGdp4/Ritratto-moderno-con-occhiali-neri.png'
                     },
                     userMessage: {
                         backgroundColor: '#3B81F6',
@@ -487,9 +477,9 @@
                         maxCharsWarningMessage: 'You exceeded the characters limit. Please input less than 50 characters.',
                         autoFocus: true,
                         sendMessageSound: true,
-                        sendSoundLocation: 'send_message.mp3', // Assicurati che il file sia accessibile
+                        sendSoundLocation: 'send_message.mp3',
                         receiveMessageSound: true,
-                        receiveSoundLocation: 'receive_message.mp3' // Assicurati che il file sia accessibile
+                        receiveSoundLocation: 'receive_message.mp3'
                     },
                     feedback: {
                         color: '#303235'
@@ -498,14 +488,12 @@
                         date: true,
                         time: true
                     },
-                    // Nota: la sezione 'footer' è stata rimossa in quest'ultima versione che hai fornito.
-                    // Se la vuoi, aggiungila nuovamente qui. Esempio:
-                    // footer: {
-                    //     textColor: '#303235',
-                    //     text: 'Powered by',
-                    //     company: 'Flowise',
-                    //     companyLink: 'https://flowiseai.com'
-                    // }
+                    footer: { // Modifica per il footer del chatbot
+                        textColor: '#303235',
+                        text: 'Powered by',
+                        company: 'Davide', // Nome modificato
+                        companyLink: '#' // Link rimosso o puntato a '#'
+                    }
                 }
             }
         })
